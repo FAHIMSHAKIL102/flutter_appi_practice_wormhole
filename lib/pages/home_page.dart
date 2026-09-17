@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
         children: [
           Center(child: Text('Home Page')),
           Text('Hello World'),
+          Text('API Integration')
         ],
       ),
     );
