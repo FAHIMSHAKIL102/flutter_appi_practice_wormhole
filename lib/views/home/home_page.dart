@@ -13,13 +13,15 @@ class _HomePageState extends State<HomePage> {
     final response = await http.get(
       Uri.parse('https://jsonplaceholder.typicode.com/posts'),
     );
-
-    print(response.body);
+    if (response.statusCode == 200) {
+      print('Success');
+    } else {
+      print('Fail');
+    }
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     fetchData();
   }
@@ -28,11 +30,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Home Page')),
-      body: Column(
-        children: [
-          Center(child: Text('Home Page')),
-          Text('Hello World'),
-          Text('API Integration'),
+      body: Column(children: [
         ],
       ),
     );

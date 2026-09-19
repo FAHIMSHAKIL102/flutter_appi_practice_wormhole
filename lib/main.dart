@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_appi_practice_wormhole/pages/home_page.dart';
+import 'package:flutter_appi_practice_wormhole/views/home/home_page.dart';
 
 void main() {
   runApp(const MyApp());
