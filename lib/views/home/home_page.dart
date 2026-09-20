@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_appi_practice_wormhole/models/posts_model.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -11,18 +12,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<dynamic> posts = [];
+  List<PostsModel> posts = [];
 
-  fetchData() async {
+  void fetchData() async {
     final response = await http.get(
       Uri.parse('https://jsonplaceholder.typicode.com/posts'),
     );
     if (response.statusCode == 200) {
       print('Success');
 
-      final jsonData = jsonDecode(response.body);
-      posts = jsonData;
+      final jsonData = jsonDecode(response.body.toString());
+      final postList = jsonData;
       print(posts.length);
+
+      for (var post in postList) {
+        posts.add(
+          PostsModel(id: post['id'], title: post['title'], body: post['body']),
+        );
+        // print(post['title']);
+      }
     } else {
       print('Fail');
     }
@@ -59,11 +67,11 @@ class _HomePageState extends State<HomePage> {
                           Icon(Icons.broken_image_outlined),
                     ),
                     title: Text(
-                      posts[index]['title'],
+                      posts[index].title,
                       style: TextStyle(fontSize: 20),
                     ),
                     subtitle: Text(
-                      posts[index]['body'],
+                      posts[index].body,
                       style: TextStyle(fontSize: 15),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
