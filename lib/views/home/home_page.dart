@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_appi_practice_wormhole/models/posts_model.dart';
+import 'package:flutter_appi_practice_wormhole/services/api_services.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -14,32 +15,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<PostsModel> posts = [];
 
-  void fetchData() async {
-    final response = await http.get(
-      Uri.parse('https://jsonplaceholder.typicode.com/posts'),
-    );
-    if (response.statusCode == 200) {
-      print('Success');
-
-      final jsonData = jsonDecode(response.body.toString());
-      final postList = jsonData;
-      print(posts.length);
-
-      for (var post in postList) {
-        posts.add(
-          PostsModel(id: post['id'], title: post['title'], body: post['body']),
-        );
-        // print(post['title']);
-      }
-    } else {
-      print('Fail');
-    }
-  }
-
   @override
   void initState() {
     super.initState();
     fetchData();
+  }
+
+  fetchData() async {
+    final data = await ApiServices.fetchData();
+
+    print(data!.length);
+    setState(() {
+      posts = data;
+    });
   }
 
   @override
