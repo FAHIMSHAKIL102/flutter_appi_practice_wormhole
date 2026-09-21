@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_appi_practice_wormhole/models/posts_model.dart';
 import 'package:flutter_appi_practice_wormhole/services/api_services.dart';
+import 'package:flutter_appi_practice_wormhole/views/post_details/post_details.dart';
+
+//import 'package:flutter_appi_practice_wormhole/models/posts_model.dart';
 
 class HomePage extends StatefulWidget {
   const new({super.key});
@@ -45,6 +47,12 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 return Card(
                   child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PostDetails()),
+                      );
+                    },
                     contentPadding: EdgeInsets.all(5),
                     leading: Image.network(
                       'https://static.vecteezy.com/system/resources/thumbnails/054/876/032/small/mirror-image-snow-capped-mountain-peaks-reflected-in-pristine-lake-free-photo.jpg',
