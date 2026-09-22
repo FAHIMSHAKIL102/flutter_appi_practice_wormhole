@@ -50,7 +50,14 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PostDetails()),
+                        MaterialPageRoute(
+                          builder: (context) => PostDetails(
+                            postId: snapshot.data![index].id.toString(),
+                            userId: snapshot.data![index].userId.toString(),
+                            title: snapshot.data![index].title.toString(),
+                            body: snapshot.data![index].body.toString(),
+                          ),
+                        ),
                       );
                     },
                     contentPadding: EdgeInsets.all(5),
